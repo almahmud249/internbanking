@@ -216,7 +216,7 @@
                                 <a href="#" class="waves-effect"><i class="fas fa-users"></i><span> Bill Entry </span><span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('new.serial')}}">New Customer</a></li>
-                                    <li><a href="">All Employee</a></li>
+                                    <li><a href="{{route('bill.entry')}}">Bill Entry</a></li>
                                     <li><a href="email-read.html">View Mail</a></li>
                                 </ul>
                             </li>

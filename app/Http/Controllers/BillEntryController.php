@@ -15,7 +15,7 @@ class BillEntryController extends Controller
      */
     public function NewSerial()
     {
-        return view('entry.billentry');
+        return view('entry.serial');
     }
 
     /**
@@ -76,9 +76,9 @@ class BillEntryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function Bill_Entry()
     {
-        //
+        return view('entry.billentry');
     }
 
     /**
@@ -87,9 +87,67 @@ class BillEntryController extends Controller
      * @param  \App\Models\BillEntry  $billEntry
      * @return \Illuminate\Http\Response
      */
-    public function show(BillEntry $billEntry)
+    public function InsertBill(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'serial' => 'required|max:4|min:4',
+            'account' => 'required| max:12|min:12',
+            'address' => 'required',
+            'phone' => 'required|max:11|min:11',
+            
+            
+            
+        ]);
+
+
+        $serial=$request->serial;
+        $srl=DB::table('bill_entries')->where('serial',$serial)->first();
+        if($srl==null) {
+
+
+                $notification=array(
+                    'message'=>'Opps!!Serial not found',
+                    'alert-type'=>'error'
+                );
+                return Redirect()->route('bill.entry')->with( $notification);
+            
+        }else{
+          
+
+
+            $data=array();
+            $data['serial']=$request->serial;
+            $data['account']=$request->account;
+            $data['amount']=$request->amount;
+            $data['month']=$request->month;
+            $data['status']=$request->status;
+            $data['comment']=$request->comment;
+                
+              
+              
+                
+                $employee=DB::table('insertbills')
+                        ->insert($data);
+        
+                        if($employee){
+                            $notification=array(
+                                'message'=>'Successfully bill entry',
+                                'alert-type'=>'success'
+                            );
+                            return Redirect()->route('bill.entry')->with( $notification);
+                        }else{
+                            $notification=array(
+                                'message'=>'Error',
+                                'alert-type'=>'success'
+                            );
+                            return Redirect()->route('bill.entry')->with( $notification);
+                        }
+
+            }
+            
+
+        
     }
 
     /**

@@ -25,3 +25,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 route::get('new_serial', [App\Http\Controllers\BillEntryController::class, 'NewSerial'])->name('new.serial');
 
 route::post('add-billinfo', [App\Http\Controllers\BillEntryController::class, 'BillEntry'])->name('add.billentry');
+route::get('BillEntry', [App\Http\Controllers\BillEntryController::class, 'Bill_Entry'])->name('bill.entry');
+route::post('insert_bill', [App\Http\Controllers\BillEntryController::class, 'InsertBill'])->name('insert.bill');
+
