@@ -14,17 +14,12 @@ class CreateBillEntriesTable extends Migration
     public function up()
     {
         Schema::create('bill_entries', function (Blueprint $table) {
-            $table->bigIncrement('id');
+            $table->bigIncrements('id');
             $table->string('serial');
             $table->string('account');
-            $table->string('amount');
-            $table->string('month');
-            $table->string('year');
-            $table->string('address'); 
-            $table->string('phone'); 
-            $table->string('status');
-            $table->string('comment');
-            $table->string('last_date');
+            $table->string('address');
+            $table->string('phone')->nullable();
+            
             $table->timestamps();
         });
     }

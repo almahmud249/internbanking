@@ -22,4 +22,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-route::get('add-billinfo', [App\Http\Controllers\BillEntryController::class, 'BillEntry'])->name('add.billentry');
+route::get('new_serial', [App\Http\Controllers\BillEntryController::class, 'NewSerial'])->name('new.serial');
+
+route::post('add-billinfo', [App\Http\Controllers\BillEntryController::class, 'BillEntry'])->name('add.billentry');

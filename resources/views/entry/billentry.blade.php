@@ -4,49 +4,66 @@
 
 
 <div class="content-page">
-                <!-- Start content -->
-                <div class="content" style="float:center" >
+                                    <!-- Start content -->
+          <div class="content" style="float:center" >
+                                        
+                                    <div class="container">
+
+
+                        <div class="container-fluid">
+                        <form role="form" method="post" enctype="multipart/form-data" action="{{url('add-billinfo')}}">
+                        @csrf
+                        <h2 class=""align="left"style="color:black">New Serial</h2>
+
+                    <div class="container">
+                        <div class="row">
+                        <div class="col-sm-4 bg-success">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">Serial</label>
+                        <input id="serial" type="serial" name="serial" required autocomplete="serial">
+                        @error('serial')
+                                            <div style="color:red">{{$message}}</div>
+
+                                            @enderror
+                        </div>
+                        <div class="col-sm-4 bg-info">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">Account</label>
+                        <input id="account" type="account" name="account" required autocomplete="account">
+                        @error('account')
+                                            <div style="color:red">{{$message}}</div>
+
+                                            @enderror
+                        </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="container">
+                        <div class="row">
+                        <div class="col-sm-4 bg-success">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">Address</label>
+                        <input id="address" type="address" name="address" required autocomplete="address">
+                        @error('address')
+                                            <div style="color:red">{{$message}}</div>
+
+                                            @enderror
+                        </div>
+                        <div class="col-sm-4 bg-info">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                        <input id="phone" type="phone" name="phone" required autocomplete="phone">
+                        @error('phone')
+                                            <div style="color:red">{{$message}}</div>
+
+                                            @enderror
+                        </div> 
                     
-                   <div class="container">
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" class="btn btn-purple waves-effect waves-light">Submit</button>
 
-
-    <div class="container-fluid">
-
-    <h1 class=""align="center"style="">Bill Entry</h1>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4 bg-success">
-      <label for="password" class="col-md-4 col-form-label text-md-right">Serial</label>
-      <input id="serial" type="serial" name="serial" required autocomplete="serial">
-      </div>
-      <div class="col-sm-4 bg-primary">
-      <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Account') }}</label>
-      <input id="account" type="account" name="account" required autocomplete="account">
-      </div> 
-   
-    </div>
-  </div>
-  <br>
-  <br>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4 bg-success">
-      <label for="password" class="col-md-4 col-form-label text-md-right">Amount</label>
-      <input id="amount" type="amount" name="amount" required autocomplete="amount">
-      </div>
-      <div class="col-sm-4 bg-primary">
-      <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Month') }}</label>
-      <input id="month" type="month" name="month" required autocomplete="month">
-      </div> 
-   
-    </div>
-  </div>
-  <br>
-<br>
-
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       <div class="col-sm-4 bg-success">
       <label for="password" class="col-md-4 col-form-label text-md-right">Year</label>
@@ -93,8 +110,8 @@
     </div>
   </div>
   <br>
-<br>
-
+<br> -->
+</form>
 </div>
     
                     </div>
