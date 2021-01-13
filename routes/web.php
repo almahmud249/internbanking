@@ -28,3 +28,7 @@ route::post('add-billinfo', [App\Http\Controllers\BillEntryController::class, 'B
 route::get('BillEntry', [App\Http\Controllers\BillEntryController::class, 'Bill_Entry'])->name('bill.entry');
 route::post('insert_bill', [App\Http\Controllers\BillEntryController::class, 'InsertBill'])->name('insert.bill');
 
+
+// route::get('view_bill', [App\Http\Controllers\BillEntryController::class, 'ViewBill'])->name('view.bill');
+route::get('fetch_bill', [App\Http\Controllers\BillEntryController::class, 'FetchBill'])->name('fetch.bill');
+

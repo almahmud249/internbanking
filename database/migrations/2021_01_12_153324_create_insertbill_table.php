@@ -21,6 +21,7 @@ class CreateInsertbillTable extends Migration
             $table->string('month');
             $table->string('status');
             $table->string('comment')->nullable();
+            $table->string('last_date');
             $table->timestamps();
         });
     }

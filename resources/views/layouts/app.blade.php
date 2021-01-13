@@ -217,7 +217,7 @@
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('new.serial')}}">New Customer</a></li>
                                     <li><a href="{{route('bill.entry')}}">Bill Entry</a></li>
-                                    <li><a href="email-read.html">View Mail</a></li>
+                                    <li><a href="{{route('fetch.bill')}}">View  bill</a></li> 
                                 </ul>
                             </li>
 

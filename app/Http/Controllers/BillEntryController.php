@@ -27,7 +27,7 @@ class BillEntryController extends Controller
     {
         $validatedData = $request->validate([
             'serial' => 'required|unique:bill_entries|max:4|min:4',
-            'account' => 'required|unique:bill_entries|max:12|min:12',
+            'account' => 'required|unique:bill_entries|max:8|min:8',
             'address' => 'required',
             'phone' => 'required|max:11|min:11',
             
@@ -92,9 +92,11 @@ class BillEntryController extends Controller
 
         $validatedData = $request->validate([
             'serial' => 'required|max:4|min:4',
-            'account' => 'required| max:12|min:12',
-            'address' => 'required',
-            'phone' => 'required|max:11|min:11',
+            'account' => 'required| max:8|min:8',
+            'amount' => 'required',
+             'month' => 'required',
+            'status' => 'required',
+            
             
             
             
@@ -114,7 +116,14 @@ class BillEntryController extends Controller
             
         }else{
           
+            $account=$request->account;
+            $month=$request->month;
+            $chck=DB::table('insertbills')->where('account',$account)->where('month',$month)->first();
 
+
+    
+
+              if($chck===null){
 
             $data=array();
             $data['serial']=$request->serial;
@@ -123,27 +132,38 @@ class BillEntryController extends Controller
             $data['month']=$request->month;
             $data['status']=$request->status;
             $data['comment']=$request->comment;
-                
-              
-              
-                
-                $employee=DB::table('insertbills')
-                        ->insert($data);
-        
-                        if($employee){
-                            $notification=array(
-                                'message'=>'Successfully bill entry',
-                                'alert-type'=>'success'
-                            );
-                            return Redirect()->route('bill.entry')->with( $notification);
-                        }else{
-                            $notification=array(
-                                'message'=>'Error',
-                                'alert-type'=>'success'
-                            );
-                            return Redirect()->route('bill.entry')->with( $notification);
-                        }
+            $data['last_date']=$request->last_date;
 
+                $employee=DB::table('insertbills')
+                ->insert($data);
+
+                if($employee){
+                    $notification=array(
+                        'message'=>'Successfully bill entry',
+                        'alert-type'=>'success'
+                    );
+                    return Redirect()->route('bill.entry')->with( $notification);
+                }else{
+                    $notification=array(
+                        'message'=>'Error',
+                        'alert-type'=>'success'
+                    );
+                    return Redirect()->route('bill.entry')->with( $notification);
+                }
+
+
+
+              }else{
+
+                $notification=array(
+                    'message'=>'opps!! this bill already submitted',
+                    'alert-type'=>'error'
+                );
+                return Redirect()->route('bill.entry')->with( $notification);
+
+              }
+                
+               
             }
             
 
@@ -156,9 +176,9 @@ class BillEntryController extends Controller
      * @param  \App\Models\BillEntry  $billEntry
      * @return \Illuminate\Http\Response
      */
-    public function edit(BillEntry $billEntry)
+    public function ViewBill()
     {
-        //
+        return view ('entry.viewbill');
     }
 
     /**
@@ -168,9 +188,10 @@ class BillEntryController extends Controller
      * @param  \App\Models\BillEntry  $billEntry
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BillEntry $billEntry)
+    public function FetchBill()
     {
-        //
+        $dt=DB::table('insertbills')->get();
+        return view('entry.viewbill',compact('dt'));
     }
 
     /**
