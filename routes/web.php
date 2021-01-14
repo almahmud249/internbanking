@@ -29,6 +29,9 @@ route::get('BillEntry', [App\Http\Controllers\BillEntryController::class, 'Bill_
 route::post('insert_bill', [App\Http\Controllers\BillEntryController::class, 'InsertBill'])->name('insert.bill');
 
 
-// route::get('view_bill', [App\Http\Controllers\BillEntryController::class, 'ViewBill'])->name('view.bill');
+route::get('view_bill/{account}', [App\Http\Controllers\BillEntryController::class, 'ViewBill'])->name('view.bill');
 route::get('fetch_bill', [App\Http\Controllers\BillEntryController::class, 'FetchBill'])->name('fetch.bill');
+
+route::get('last_date_bill', [App\Http\Controllers\BillEntryController::class, 'LastDateBill'])->name('lats_date.bill');
+
 

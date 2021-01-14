@@ -18,6 +18,15 @@
                     <div class="container">
                         <div class="row">
                         <div class="col-sm-4 bg-success">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">Name</label>
+                        <input id="name" type="name" name="name" required autocomplete="name">
+                        @error('name')
+                                            <div style="color:red">{{$message}}</div>
+
+                                            @enderror
+                        </div>
+
+                        <div class="col-sm-4 bg-success">
                         <label for="password" class="col-md-4 col-form-label text-md-right">Serial</label>
                         <input id="serial" type="serial" name="serial" required autocomplete="serial">
                         @error('serial')
@@ -25,6 +34,7 @@
 
                                             @enderror
                         </div>
+
                         <div class="col-sm-4 bg-info">
                         <label for="password" class="col-md-4 col-form-label text-md-right">Account</label>
                         <input id="account" type="account" name="account" required autocomplete="account">

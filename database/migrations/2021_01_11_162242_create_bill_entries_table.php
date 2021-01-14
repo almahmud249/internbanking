@@ -15,6 +15,7 @@ class CreateBillEntriesTable extends Migration
     {
         Schema::create('bill_entries', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->string('serial');
             $table->string('account');
             $table->string('address');

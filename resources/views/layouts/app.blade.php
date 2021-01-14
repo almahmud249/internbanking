@@ -213,11 +213,12 @@
                             </li>
 
                             <li class="has_sub">
-                                <a href="#" class="waves-effect"><i class="fas fa-users"></i><span> Bill Entry </span><span class="pull-right"><i class="md md-add"></i></span></a>
+                                <a href="#" class="waves-effect"><i class="fas fa-users"></i><span> A3 Solution </span><span class="pull-right"><i class="md md-add"></i></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="{{route('new.serial')}}">New Customer</a></li>
                                     <li><a href="{{route('bill.entry')}}">Bill Entry</a></li>
                                     <li><a href="{{route('fetch.bill')}}">View  bill</a></li> 
+                                    <li><a href="{{route('lats_date.bill')}}">Last Date Bill</a></li> 
                                 </ul>
                             </li>
 

@@ -33,6 +33,7 @@ class BillEntryController extends Controller
             
         ]);
         $data=array();
+        $data['name']=$request->name;
         $data['serial']=$request->serial;
         $data['account']=$request->account;
         $data['address']=$request->address;
@@ -119,48 +120,42 @@ class BillEntryController extends Controller
             $account=$request->account;
             $month=$request->month;
             $chck=DB::table('insertbills')->where('account',$account)->where('month',$month)->first();
+  
+              if( $chck){
 
-
-    
-
-              if($chck===null){
-
-            $data=array();
-            $data['serial']=$request->serial;
-            $data['account']=$request->account;
-            $data['amount']=$request->amount;
-            $data['month']=$request->month;
-            $data['status']=$request->status;
-            $data['comment']=$request->comment;
-            $data['last_date']=$request->last_date;
-
-                $employee=DB::table('insertbills')
-                ->insert($data);
-
-                if($employee){
-                    $notification=array(
-                        'message'=>'Successfully bill entry',
-                        'alert-type'=>'success'
-                    );
-                    return Redirect()->route('bill.entry')->with( $notification);
-                }else{
-                    $notification=array(
-                        'message'=>'Error',
-                        'alert-type'=>'success'
-                    );
-                    return Redirect()->route('bill.entry')->with( $notification);
-                }
-
-
-
-              }else{
-
+            
                 $notification=array(
                     'message'=>'opps!! this bill already submitted',
                     'alert-type'=>'error'
                 );
                 return Redirect()->route('bill.entry')->with( $notification);
-
+          
+              }else{
+                $data=array();
+                $data['serial']=$request->serial;
+                $data['account']=$request->account;
+                $data['amount']=$request->amount;
+                $data['month']=$request->month;
+                $data['status']=$request->status;
+                $data['comment']=$request->comment;
+                $data['last_date']=$request->last_date;
+    
+                    $employee=DB::table('insertbills')
+                    ->insert($data);
+    
+                    if($employee){
+                        $notification=array(
+                            'message'=>'Successfully bill entry',
+                            'alert-type'=>'success'
+                        );
+                        return Redirect()->route('bill.entry')->with( $notification);
+                    }else{
+                        $notification=array(
+                            'message'=>'Error',
+                            'alert-type'=>'success'
+                        );
+                        return Redirect()->route('bill.entry')->with( $notification);
+                    }
               }
                 
                
@@ -176,9 +171,16 @@ class BillEntryController extends Controller
      * @param  \App\Models\BillEntry  $billEntry
      * @return \Illuminate\Http\Response
      */
-    public function ViewBill()
+    public function ViewBill($account)
     {
-        return view ('entry.viewbill');
+        // $emp=DB::table('insertbills')
+        // ->join('bill_entries', 'insertbills.account', 'bill_entries.account')
+        // ->select('insertbills.*', 'bill_entries.*' )
+        // ->first();
+        $A=DB::table('bill_entries')->where('account',$account)->get();
+        $B=DB::table('insertbills')->where('account',$account)->get ();
+        
+        return view('entry.singleaccount',compact('A','B'));
     }
 
     /**
@@ -194,14 +196,12 @@ class BillEntryController extends Controller
         return view('entry.viewbill',compact('dt'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BillEntry  $billEntry
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BillEntry $billEntry)
+   
+    public function LastDateBill()
     {
-        //
+        
+       $last_date=  date("Y-m-d");
+       $today=Db::table('insertbills')->where('last_date',$last_date)->get();
+       return view('entry.lastdatebill',compact('today'));
     }
 }

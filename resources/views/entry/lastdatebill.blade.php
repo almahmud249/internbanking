@@ -42,7 +42,8 @@
 
                                          
                                                     <tbody>
-                                                    @foreach($dt as $row)
+                                                    
+                                                    @foreach($today as $row)
                                                     <tr>
                                                     <td>{{ $row->serial }}</td>
                                                     <td>{{ $row->account }}</td>
@@ -52,13 +53,14 @@
 
                                                    
                                                     <td>
-                                                    <a href="{{URL::to('view_bill/'.$row->account)}}" class="btn btn-primary">View</a>
+                                                    <a href="{{URL::to('view_bill/'.$row->id)}}" class="btn btn-primary">View</a>
                                                     <a href="{{URL::to('edit-employee/'.$row->id)}}" class="btn btn-success">Edit</a>
                                                     <a href="{{URL::to('delete-employee/'.$row->id)}}" id="delete" class="btn btn-danger">Delete</a>
 
                                                 </td>
                                                     </tr>
                                                  @endforeach 
+                                               
                                                     </tbody>
                                                  
                                                 </table>
